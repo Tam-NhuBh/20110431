@@ -17,27 +17,27 @@ exports.getMSSV = (req, res) => {
   res.json(student);
 };
 
-exports.postMessage = (req, res) => {
-  const { MSSV, id } = req.params;
-  const { body } = req;
+exports.postStudent = (req, res) => {
+  const { id, name } = req.params; //lấy dữ liệu gửi đến từ client
 
-  // Kiểm tra xem MSSV có trong danh sách không
-  const student = mygroup.find((item) => item.id === MSSV);
-
-  if (!student) {
-    return res.json({ error: 'not valid' });
+  // Kiểm tra xem id và name có tồn tại
+  if (!id || !name) {
+    return res.json({ error: 'Mã sinh viên (id) và tên sinh viên (name) là bắt buộc.' });
   }
 
   // Kiểm tra xem id đã tồn tại trong danh sách chưa
-  const exist = student.posts.find((post) => post.id === id);
+  const existingStudent = mygroup.find((student) => student.id === id);
 
-  if (exist) {
-    return res.json({ error: 'not valid' });
+  if (existingStudent) {
+    return res.json({ error: 'Mã sinh viên (id) đã tồn tại trong danh sách.' });
   }
 
-  // Thêm bài đăng mới
-  student.posts.push({ id, body });
-  res.json(student.posts);
+  // Thêm sinh viên mới vào danh sách
+  mygroup.push({id, name});
+
+  // Trả về danh sách sau khi thêm mới
+  res.json(mygroup);
+  
 };
 
 exports.getMessage = (req, res) => {
