@@ -4,15 +4,21 @@ exports.getAll = (req, res) => {
   res.json(mygroup);
 };
 
-exports.getMSSV = (req, res) => {
-  const { MSSV } = req.params;
-  const student = mygroup.find((item) => item.id === MSSV);
+exports.getMessage = (req, res) => {
+  const { id } = req.params;
 
-  if (!student) {
-    return res.json({ error: 'not valid' });
+  if (!id) {
+    // Nếu không có id, hiển thị danh sách tất cả sinh viên
+    res.json( mygroup );
+  } else {
+    // Nếu có id, tìm sinh viên có mã id tương ứng và hiển thị
+    const student = mygroup.find((item) => item.id === id);
+    if (!student) {
+      return res.json({ error: 'not valid' });
+    }
+
+    res.json( student );
   }
-
-  res.json(student);
 };
 
 exports.postStudent = (req, res) => {
@@ -36,21 +42,4 @@ exports.postStudent = (req, res) => {
   // Trả về danh sách sau khi thêm mới
   res.json(mygroup);
   
-};
-
-exports.getMessage = (req, res) => {
-  const { id } = req.params;
-  
-  if (!id) {
-    const studentNames = mygroup.map((student) => student.name);
-    return res.render('students', { studentNames });
-  }
-
-  const student = mygroup.find((item) => item.id === id);
-
-  if (!student) {
-    return res.json({ error: 'not valid' });
-  }
-
-  res.render('student', { student });
 };

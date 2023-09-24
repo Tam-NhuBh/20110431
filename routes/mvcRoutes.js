@@ -10,8 +10,7 @@ router.use((req, res, next) => {
 
 // Routes
 router.get('/', mvcController.getAll); // Endpoint /
-router.get('/:MSSV/:id', mvcController.getMSSV); // Endpoint /<MSSV>/<id>
 router.post('/:id/:name', mvcController.postStudent); // Endpoint /<id>/<name>
-router.get('/message/:id', mvcController.getMessage); // Endpoint /message/<id>
+router.get('/message/:id?', mvcController.getMessage); // Endpoint /message/<id>
 
 module.exports = router;
