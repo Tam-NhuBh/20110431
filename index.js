@@ -1,21 +1,18 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
-const port = 5000;
+const PORT = 5000;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// Cấu hình EJS
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
-// Import các route
-const indexRouter = require('./routes/index');
-const messageRouter = require('./routes/message');
-const MSSVRouter = require('./routes/MSSV');
+// Import route từ thư mục "routes"
+const mvcRoutes = require('./routes/mvcRoutes');
 
 // Sử dụng route
-app.use('/', indexRouter);
-app.use('/message', messageRouter);
-app.use('/:MSSV', MSSVRouter);
+app.use('/', mvcRoutes);
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+// Khởi động server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
