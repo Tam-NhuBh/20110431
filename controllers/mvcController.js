@@ -1,5 +1,3 @@
-// controllers/mvcController.js
-
 const mygroup = require('../models/mvcModel');
 
 exports.getAll = (req, res) => {
@@ -42,7 +40,7 @@ exports.postStudent = (req, res) => {
 
 exports.getMessage = (req, res) => {
   const { id } = req.params;
-
+  
   if (!id) {
     const studentNames = mygroup.map((student) => student.name);
     return res.render('students', { studentNames });
