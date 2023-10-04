@@ -1,0 +1,66 @@
+<body>
+    {{!-- <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Create Post -->
+      <form method="POST" action="/">
+          <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Create Post</h5>
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" id ="content" name="content" placeholder="What's on your mind?"></textarea>
+                </div>
+                <button class="btn btn-primary">Post</button>
+            </div>
+        </div>
+      </form> --}}
+
+        <!-- News Feed -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">News</h5>
+                <!-- Individual Posts -->
+                {{#each blogs}}
+                {{!-- <div class="media">
+                    <div class="media-body">
+                        <h5 class="mt-0"></h5>
+                        {{this.title}}
+                    </div>
+                </div> --}}
+                <div class="media mt-3">
+                    <div class="media-body">
+                        <a href="/details/{{this.id}}"><h5 class="mt-0">Bài Viết Số : {{this.id}}</h5></a>
+                        {{this.content}}
+                    </div>
+                    {{!-- Update --}}
+                    <form method="get" action="/details/edit/{{this.id}}">
+                        <span class="ml-4">
+                        {{!-- <a href ="/details/edit/{{this.id}}"></a> --}}
+                        <a href="/details/edit/{{this.id}}" class="btn btn-outline-success">Sửa</a>
+                        </span>
+                    </form>
+
+    
+                    {{!-- Update --}}
+
+                    {{!-- Delete --}}
+                    <form method="POST" action="/details/delete/{{this.id}}?_method=DELETE">
+                        <span class="ml-4">
+                            {{!-- <a>Xóa</a> --}}
+                        </span>
+                            <button type="submit" class="btn btn-outline-danger">Xóa</button>
+                    </form>
+                    {{!-- Delete --}}
+
+                    
+                </div>
+                {{/each}}
+                <!-- Add more posts here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
